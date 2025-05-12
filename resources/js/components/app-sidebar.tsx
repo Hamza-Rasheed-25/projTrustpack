@@ -3,9 +3,10 @@ import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
-import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-react';
+import { Link, usePage } from '@inertiajs/react';
+import { LayoutGrid, Shield, Printer, Sheet, Slice, Bandage, HandPlatter } from 'lucide-react';
 import AppLogo from './app-logo';
+
 
 const mainNavItems: NavItem[] = [
     {
@@ -14,21 +15,71 @@ const mainNavItems: NavItem[] = [
         icon: LayoutGrid,
     },
 ];
-
-const footerNavItems: NavItem[] = [
+const adminNavItems: NavItem[] = [
     {
-        title: 'Repository',
-        href: 'https://github.com/laravel/react-starter-kit',
-        icon: Folder,
+        title: 'Admin Panel',
+        href: '/admin-panel',
+        icon: Shield,
     },
+];
+const printerNavItems: NavItem[] = [
     {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#react',
-        icon: BookOpen,
+        title: 'Printer',
+        href: '/printer',
+        icon: Printer,
+    },
+];
+const laminatorNavItems: NavItem[] = [
+    {
+        title: 'Laminator',
+        href: '/laminator',
+        icon: Sheet,
+    },
+];
+const slitterNavItems: NavItem[] = [
+    {
+        title: 'Slitter',
+        href: '/slitter',
+        icon: Slice,
+    },
+];
+const doctorNavItems: NavItem[] = [
+    {
+        title: 'Doctor',
+        href: '/doctor',
+        icon: Bandage,
+    },
+];
+const mhsNavItems: NavItem[] = [
+    {
+        title: 'MHS',
+        href: '/mhs',
+        icon: HandPlatter,
     },
 ];
 
+
 export function AppSidebar() {
+
+let { auth } = usePage().props;
+let userRole = auth?.user?.role || 'Admin';
+
+let roleBasedNavItems = [...mainNavItems];
+
+if (userRole === 'admin') {
+    roleBasedNavItems = [...roleBasedNavItems, ...adminNavItems, ...printerNavItems, ...laminatorNavItems, ...slitterNavItems, ...doctorNavItems, ...mhsNavItems];
+} else if (userRole === 'printer') {
+    roleBasedNavItems = [...roleBasedNavItems, ...printerNavItems];
+} else if (userRole === 'laminator') {
+    roleBasedNavItems = [...roleBasedNavItems, ...laminatorNavItems];
+} else if (userRole === 'slitter') {
+    roleBasedNavItems = [...roleBasedNavItems, ...slitterNavItems];
+} else if (userRole === 'doctor') {
+    roleBasedNavItems = [...roleBasedNavItems, ...doctorNavItems];
+} else if (userRole === 'mhs') {
+    roleBasedNavItems = [...roleBasedNavItems, ...mhsNavItems];
+}
+
     return (
         <Sidebar collapsible="icon" variant="inset">
             <SidebarHeader>
@@ -44,11 +95,10 @@ export function AppSidebar() {
             </SidebarHeader>
 
             <SidebarContent>
-                <NavMain items={mainNavItems} />
+                <NavMain items={roleBasedNavItems} />
             </SidebarContent>
 
             <SidebarFooter>
-                <NavFooter items={footerNavItems} className="mt-auto" />
                 <NavUser />
             </SidebarFooter>
         </Sidebar>
