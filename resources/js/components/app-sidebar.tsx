@@ -18,7 +18,7 @@ const mainNavItems: NavItem[] = [
 const adminNavItems: NavItem[] = [
     {
         title: 'Admin Panel',
-        href: '/admin-panel',
+        href: '/users',
         icon: Shield,
     },
 ];

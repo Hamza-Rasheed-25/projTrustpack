@@ -1,22 +1,27 @@
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
+import { Button } from '@/components/ui/button';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Admin Panel',
-        href: '/admin-panel',
+        href: '/user-details',
     },
 ];
 
 export default function Admin_Panel() {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Admin Panel" />
+            <Head title="User Details" />
             <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-5">
-                {/* <div className="text-3xl font-bold text-neutral-900 dark:text-neutral-100">
-                    Admin Panel, Here you can manage all the users and their roles. Add or remove users, and assign roles to them.
-                </div> */}
+                <div>
+                    <Link
+                        href={route('users.create')}
+                        >
+                            <Button>Create User</Button>
+                    </Link>
+                </div>
                 <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <table className="w-full text-left text-sm text-gray-500 rtl:text-right dark:text-gray-400">
                         <caption className="bg-white p-5 text-left text-lg font-semibold text-gray-900 rtl:text-right dark:bg-zinc-900 dark:text-white">
@@ -28,13 +33,13 @@ export default function Admin_Panel() {
                         <thead className="bg-gray-100 text-xs text-gray-700 uppercase dark:bg-zinc-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" className="px-6 py-3">
-                                    Product name
+                                    User Name
                                 </th>
                                 <th scope="col" className="px-6 py-3">
-                                    Color
+                                    Email
                                 </th>
                                 <th scope="col" className="px-6 py-3">
-                                    Category
+                                    Role
                                 </th>
                                 <th scope="col" className="px-6 py-3">
                                     Price
@@ -53,8 +58,11 @@ export default function Admin_Panel() {
                                 <td className="px-6 py-4">Laptop</td>
                                 <td className="px-6 py-4">$2999</td>
                                 <td className="px-6 py-4 text-right">
-                                    <a href="#" className="font-medium text-blue-600 hover:underline dark:text-blue-500">
+                                    <a href="#" className="font-medium text-blue-600 hover:underline dark:text-blue-500 px-3">
                                         Edit
+                                    </a>
+                                    <a href="#" className="font-medium text-red-600 hover:underline dark:text-red-500">
+                                        Delete
                                     </a>
                                 </td>
                             </tr>
@@ -66,8 +74,11 @@ export default function Admin_Panel() {
                                 <td className="px-6 py-4">Accessories</td>
                                 <td className="px-6 py-4">$99</td>
                                 <td className="px-6 py-4 text-right">
-                                    <a href="#" className="font-medium text-blue-600 hover:underline dark:text-blue-500">
+                                    <a href="#" className="font-medium text-blue-600 hover:underline dark:text-blue-500 px-3">
                                         Edit
+                                    </a>
+                                    <a href="#" className="font-medium text-red-600 hover:underline dark:text-red-500">
+                                        Delete
                                     </a>
                                 </td>
                             </tr>

@@ -4,6 +4,7 @@ use \Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\roleController;
+use App\Http\Controllers\userController;
 
     Route::get('/', function () {
         return Auth::check() ? redirect()->route('dashboard') : redirect()->route('login');
@@ -16,9 +17,10 @@ use App\Http\Controllers\roleController;
     });
 
 
-    Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
-    Route::get('/admin-panel',[roleController::class,'admin'])->name('admin-panel');
-    });
+    Route::resource(name: 'users', controller: userController::class)->middleware(['auth','verified', 'role:admin']);
+    // Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
+    // Route::get('/admin-panel',[roleController::class,'admin'])->name('admin-panel');
+    // });
     Route::middleware(['auth', 'verified', 'role:printer'])->group(function () {
     Route::get('/printer',[roleController::class,'printer'])->name('printer');
     });
