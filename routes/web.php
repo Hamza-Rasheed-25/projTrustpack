@@ -4,7 +4,6 @@ use \Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\roleController;
-use App\Http\Middleware\roleMiddleware;
 
     Route::get('/', function () {
         return Auth::check() ? redirect()->route('dashboard') : redirect()->route('login');
