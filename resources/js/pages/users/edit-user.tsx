@@ -5,49 +5,45 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Head, Link, useForm, usePage } from '@inertiajs/react';
 import { LoaderCircle } from 'lucide-react';
 import { FormEventHandler } from 'react';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Admin Panel',
-        href: '/create-user',
+        href: '/edit-user',
     },
 ];
 type CreateUserForm = {
     name: string;
     email: string;
-    password: string;
-    password_confirmation: string;
     role: string;
 };
 
-export default function Admin_Panel() {
-    const { data, setData, post, processing, errors, reset } = useForm<Required<CreateUserForm>>({
-        name: '',
-        email: '',
-        password: '',
-        password_confirmation: '',
-        role: '',
+export default function Edit_user() {
+    const { users } = usePage().props;
+    console.log();
+    const { data, setData, put, processing, errors} = useForm<Required<CreateUserForm>>({
+        name: users.name || '',
+        email: users.email || '',
+        role:  '',
     });
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
-        post(route('users.store'), {
-            onFinish: () => reset('password', 'password_confirmation'),
-        });
+        put(route('users.update', users.id));
     };
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Create User" />
+            <Head title="Edit User" />
             <div className="bg-background flex  flex-col items-center m-6 gap-6 p-6 md:p-10">
                 <div className="w-full max-w-sm">
                     <div className="flex flex-col">
                         <div className="flex h-full flex-1 flex-col gap-2 rounded-xl ">
                             <div>
-                                <h1 className="text-xl font-medium text-center">Create a New User Account</h1>
+                                <h1 className="text-xl font-medium text-center">Edit the User Account</h1>
                                 {/* <Link href={route('users.index')}>
                                     <Button>Back</Button>
                                 </Link> */}
@@ -88,38 +84,6 @@ export default function Admin_Panel() {
                                     </div>
 
                                     <div className="grid gap-2">
-                                        <Label htmlFor="password">Password</Label>
-                                        <Input
-                                            id="password"
-                                            type="password"
-                                            required
-                                            tabIndex={3}
-                                            autoComplete="new-password"
-                                            value={data.password}
-                                            onChange={(e) => setData('password', e.target.value)}
-                                            disabled={processing}
-                                            placeholder="Password"
-                                        />
-                                        <InputError message={errors.password} />
-                                    </div>
-
-                                    <div className="grid gap-2">
-                                        <Label htmlFor="password_confirmation">Confirm password</Label>
-                                        <Input
-                                            id="password_confirmation"
-                                            type="password"
-                                            required
-                                            tabIndex={4}
-                                            autoComplete="new-password"
-                                            value={data.password_confirmation}
-                                            onChange={(e) => setData('password_confirmation', e.target.value)}
-                                            disabled={processing}
-                                            placeholder="Confirm password"
-                                        />
-                                        <InputError message={errors.password_confirmation} />
-                                    </div>
-
-                                    <div className="grid gap-2">
                                         <Label htmlFor="role">Role</Label>
                                         <Select required onValueChange={(value) => setData('role', value)} disabled={processing} value={data.role}>
                                             <SelectTrigger className="w-full">
@@ -136,6 +100,7 @@ export default function Admin_Panel() {
                                         </Select>
                                         <InputError message={errors.role} />
                                     </div>
+
                                     <div>
                                         <Button type="submit" className="w-full" tabIndex={5} disabled={processing}>
                                             {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}

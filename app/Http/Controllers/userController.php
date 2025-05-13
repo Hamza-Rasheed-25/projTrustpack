@@ -20,7 +20,10 @@ class userController extends Controller
      */
     public function index()
     {
-        return Inertia::render('users/user-details', []);
+        return Inertia::render('users/user-details', [
+            "users" => User::all(),
+            // "users" => User::latest()->get(),
+        ]);
     }
 
     /**
@@ -46,9 +49,11 @@ class userController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => $request->role,
         ]);
 
         event(new Registered($user));
+        return redirect()->route('users.index');
     }
 
     /**
@@ -64,7 +69,10 @@ class userController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $users = User::find($id);
+        return Inertia::render('users/edit-user', [
+            'users' => $users,
+        ]);
     }
 
     /**
@@ -72,7 +80,18 @@ class userController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|lowercase|email|max:255'
+        ]);
+
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->role = $request->role;
+
+        $user->save();
+        return redirect()->route('users.index');
     }
 
     /**
@@ -80,6 +99,7 @@ class userController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        User::destroy($id);
+        return redirect()->route('users.index');
     }
 }
