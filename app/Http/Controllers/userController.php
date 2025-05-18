@@ -21,8 +21,8 @@ class userController extends Controller
     public function index()
     {
         return Inertia::render('users/user-details', [
-            "users" => User::all(),
-            // "users" => User::latest()->get(),
+            // "users" => User::all(),
+            "users" => User::latest()->get(),
         ]);
     }
 
@@ -53,7 +53,7 @@ class userController extends Controller
         ]);
 
         event(new Registered($user));
-        return redirect()->route('users.index');
+        return redirect()->route('po.index');
     }
 
     /**

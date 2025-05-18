@@ -23,7 +23,6 @@ type CreateUserForm = {
 
 export default function Edit_user() {
     const { users } = usePage().props;
-    console.log();
     const { data, setData, put, processing, errors} = useForm<Required<CreateUserForm>>({
         name: users.name || '',
         email: users.email || '',
@@ -104,7 +103,7 @@ export default function Edit_user() {
                                     <div>
                                         <Button type="submit" className="w-full" tabIndex={5} disabled={processing}>
                                             {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
-                                            Create account
+                                            Edit Account
                                         </Button>
                                         <Link href={route('users.index')}>
                                             <Button variant="destructive" className='w-full mt-2'>Cancel</Button>

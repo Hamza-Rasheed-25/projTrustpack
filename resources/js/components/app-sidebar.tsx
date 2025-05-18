@@ -4,7 +4,7 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
-import { LayoutGrid, Shield, Printer, Sheet, Slice, Bandage, HandPlatter } from 'lucide-react';
+import { LayoutGrid, Shield, Printer, Sheet, Slice, Bandage, HandPlatter, ShoppingBag, Paintbrush } from 'lucide-react';
 import AppLogo from './app-logo';
 
 
@@ -20,6 +20,11 @@ const adminNavItems: NavItem[] = [
         title: 'Admin Panel',
         href: '/users',
         icon: Shield,
+    },
+    {
+        title: 'Purchase Order',
+        href: '/po',
+        icon: ShoppingBag,
     },
 ];
 const printerNavItems: NavItem[] = [
@@ -62,7 +67,7 @@ const mhsNavItems: NavItem[] = [
 export function AppSidebar() {
 
 let { auth } = usePage().props;
-let userRole = auth?.user?.role || 'Admin';
+let userRole = auth?.user?.role || 'Guest';
 
 let roleBasedNavItems = [...mainNavItems];
 
