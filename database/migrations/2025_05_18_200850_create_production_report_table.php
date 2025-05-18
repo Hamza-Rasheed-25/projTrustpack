@@ -22,7 +22,8 @@ return new class extends Migration
         });
 
         Schema::create('designs', function (Blueprint $table) {
-            $table->string('design_id')->primary();
+            $table->id();
+            $table->string('design_id')->unique();
             $table->string('design_name');
             $table->timestamps();
         });

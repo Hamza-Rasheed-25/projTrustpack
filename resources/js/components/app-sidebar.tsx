@@ -26,6 +26,11 @@ const adminNavItems: NavItem[] = [
         href: '/po',
         icon: ShoppingBag,
     },
+    {
+        title: 'Design',
+        href: '/design',
+        icon: Paintbrush,
+    },
 ];
 const printerNavItems: NavItem[] = [
     {

@@ -7,12 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Design extends Model
 {
-    use HasFactory;
-
-    protected $primaryKey = 'design_id';
-    public $incrementing = false;
-    protected $keyType = 'string';
-
     protected $fillable = [
         'design_id',
         'design_name',

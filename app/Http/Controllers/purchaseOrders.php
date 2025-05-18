@@ -15,8 +15,7 @@ class purchaseOrders extends Controller
     public function index()
     {
         return Inertia::render('po/index', [
-            "po" => PurchaseOrder::all(),
-            "users" => User::all(),
+            "po" => PurchaseOrder::latest()->get(),
 
         ]);
     }
