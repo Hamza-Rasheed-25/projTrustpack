@@ -4,7 +4,7 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
-import { LayoutGrid, Shield, Printer, Sheet, Slice, Bandage, HandPlatter, ShoppingBag, Paintbrush } from 'lucide-react';
+import { LayoutGrid, Shield, Printer, Sheet, Slice, Bandage, HandPlatter, ShoppingBag, Paintbrush, Scroll } from 'lucide-react';
 import AppLogo from './app-logo';
 
 
@@ -30,6 +30,11 @@ const adminNavItems: NavItem[] = [
         title: 'Design',
         href: '/design',
         icon: Paintbrush,
+    },
+    {
+        title: 'Rolls Reels',
+        href: '/rr',
+        icon: Scroll,
     },
 ];
 const printerNavItems: NavItem[] = [

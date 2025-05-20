@@ -22,8 +22,4 @@ class ProductionError extends Model
         'comment',
     ];
 
-    public function purchaseOrder(): BelongsTo
-    {
-        return $this->belongsTo(PurchaseOrder::class, 'po_number', 'po_number');
-    }
 }

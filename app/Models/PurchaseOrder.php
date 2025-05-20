@@ -17,14 +17,4 @@ class PurchaseOrder extends Model
     protected $fillable = [
         'po_number',
     ];
-
-    public function rollsReels(): HasMany
-    {
-        return $this->hasMany(RollsReel::class, 'po_number', 'po_number');
-    }
-
-    public function productionErrors(): HasMany
-    {
-        return $this->hasMany(ProductionError::class, 'po_number', 'po_number');
-    }
 }

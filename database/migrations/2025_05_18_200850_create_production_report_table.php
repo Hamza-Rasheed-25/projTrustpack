@@ -42,9 +42,6 @@ return new class extends Migration
             $table->string('reel_design_6')->nullable();
             $table->string('reel_design_7')->nullable();
 
-            $table->foreign('po_number')->references('po_number')->on('purchase_orders')->onDelete('cascade');
-
-            $table->unique(['po_number', 'roll_number']); // Unique per PO
             $table->timestamps();
         });
 
@@ -59,9 +56,7 @@ return new class extends Migration
             $table->string('error_stage');
             $table->enum('error_id', ['1', '2', '3', '4', '5', '6', '7']);
             $table->text('comment')->nullable();
-            $table->foreign('po_number')->references('po_number')->on('purchase_orders')->onDelete('cascade');
 
-            $table->unique(['po_number', 'roll_number']);
             $table->timestamps();
         });
     }

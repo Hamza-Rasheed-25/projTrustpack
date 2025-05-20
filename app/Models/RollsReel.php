@@ -23,10 +23,5 @@ class RollsReel extends Model
         'reel_design_7',
     ];
 
-    public function purchaseOrder(): BelongsTo
-    {
-        return $this->belongsTo(PurchaseOrder::class, 'po_number', 'po_number');
-    }
-
     // If you decide to have a separate reels table later, you might add a hasMany relationship here.
 }

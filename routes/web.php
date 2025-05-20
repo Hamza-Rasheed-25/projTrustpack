@@ -7,6 +7,7 @@ use App\Http\Controllers\roleController;
 use App\Http\Controllers\userController;
 use App\Http\Controllers\purchaseOrders;
 use App\Http\Controllers\designs;
+use App\Http\Controllers\rollsReels;
 
     Route::get('/', function () {
         return Auth::check() ? redirect()->route('dashboard') : redirect()->route('login');
@@ -22,6 +23,7 @@ use App\Http\Controllers\designs;
     Route::resource(name: 'users', controller: userController::class)->middleware(['auth','verified', 'role:admin']);
     Route::resource(name: 'po', controller: purchaseOrders::class)->middleware(['auth','verified', 'role:admin']);
     Route::resource(name: 'design', controller: designs::class)->middleware(['auth','verified', 'role:admin']);
+    Route::resource(name: 'rr', controller: rollsReels::class)->middleware(['auth','verified', 'role:admin']);
     // Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     // Route::get('/admin-panel',[roleController::class,'admin'])->name('admin-panel');
     // });
